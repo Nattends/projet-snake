@@ -19,6 +19,28 @@ class SnakeGame:
         self.food = self.spawn_food()
         self.score = 0
 
+        # Chargement des sprites
+        self.sprites = {
+            "head_up": pygame.image.load("assets/sprites/head_up.png"),
+            "head_down": pygame.image.load("assets/sprites/head_down.png"),
+            "head_left": pygame.image.load("assets/sprites/head_left.png"),
+            "head_right": pygame.image.load("assets/sprites/head_right.png"),
+            "body_horizontal": pygame.image.load("assets/sprites/body_horizontal.png"),
+            "body_vertical": pygame.image.load("assets/sprites/body_vertical.png"),
+            "body_topleft": pygame.image.load("assets/sprites/body_topleft.png"),
+            "body_topright": pygame.image.load("assets/sprites/body_topright.png"),
+            "body_bottomleft": pygame.image.load("assets/sprites/body_bottomleft.png"),
+            "body_bottomright": pygame.image.load("assets/sprites/body_bottomright.png"),
+            "tail_up": pygame.image.load("assets/sprites/tail_up.png"),
+            "tail_down": pygame.image.load("assets/sprites/tail_down.png"),
+            "tail_left": pygame.image.load("assets/sprites/tail_left.png"),
+            "tail_right": pygame.image.load("assets/sprites/tail_right.png"),
+            "apple": pygame.image.load("assets/sprites/apple.png")
+        }
+
+        # Agrandir la pomme (changer la taille de l'image)
+        self.sprites["apple"] = pygame.transform.scale(self.sprites["apple"], (self.cell_size * 2, self.cell_size * 2))
+
     def spawn_food(self):
         x = random.randint(0, (self.screen_width // self.cell_size) - 1) * self.cell_size
         y = random.randint(0, (self.screen_height // self.cell_size) - 1) * self.cell_size
@@ -51,9 +73,50 @@ class SnakeGame:
 
     def draw_elements(self):
         self.screen.blit(self.background_img, (0, 0))
-        for segment in self.snake:
-            pygame.draw.rect(self.screen, (0, 255, 0), (*segment, self.cell_size, self.cell_size))
-        pygame.draw.rect(self.screen, (255, 0, 0), (*self.food, self.cell_size, self.cell_size))
+
+        # Dessiner la pomme
+        self.screen.blit(self.sprites["apple"], tuple(self.food))
+
+        # Dessiner le serpent
+        for i, segment in enumerate(self.snake):
+            if i == 0:  # Tête
+                if self.direction == "UP":
+                    img = self.sprites["head_up"]
+                elif self.direction == "DOWN":
+                    img = self.sprites["head_down"]
+                elif self.direction == "LEFT":
+                    img = self.sprites["head_left"]
+                else:
+                    img = self.sprites["head_right"]
+            elif i == len(self.snake) - 1:  # Queue
+                prev = self.snake[i - 1]
+                if prev[0] < segment[0]:
+                    img = self.sprites["tail_right"]
+                elif prev[0] > segment[0]:
+                    img = self.sprites["tail_left"]
+                elif prev[1] < segment[1]:
+                    img = self.sprites["tail_down"]
+                else:
+                    img = self.sprites["tail_up"]
+            else:  # Corps
+                prev = self.snake[i - 1]
+                next_seg = self.snake[i + 1]
+
+                if prev[0] == next_seg[0]:  # Vertical
+                    img = self.sprites["body_vertical"]
+                elif prev[1] == next_seg[1]:  # Horizontal
+                    img = self.sprites["body_horizontal"]
+                else:  # Coin
+                    if (prev[0] < segment[0] and next_seg[1] < segment[1]) or (next_seg[0] < segment[0] and prev[1] < segment[1]):
+                        img = self.sprites["body_topleft"]
+                    elif (prev[0] > segment[0] and next_seg[1] < segment[1]) or (next_seg[0] > segment[0] and prev[1] < segment[1]):
+                        img = self.sprites["body_topright"]
+                    elif (prev[0] < segment[0] and next_seg[1] > segment[1]) or (next_seg[0] < segment[0] and prev[1] > segment[1]):
+                        img = self.sprites["body_bottomleft"]
+                    else:
+                        img = self.sprites["body_bottomright"]
+
+            self.screen.blit(img, tuple(segment))
         pygame.display.flip()
 
     def save_score(self):
@@ -92,4 +155,3 @@ class SnakeGame:
             self.clock.tick(10)
         pygame.quit()
         sys.exit()
-
