@@ -20,11 +20,13 @@ class SnakeGame:
         self.score = 0
 
     def spawn_food(self):
+        """Fait apparaître un morceau de nourriture à une position aléatoire"""
         x = random.randint(0, (self.screen_width // self.cell_size) - 1) * self.cell_size
         y = random.randint(0, (self.screen_height // self.cell_size) - 1) * self.cell_size
         return [x, y]
 
     def move_snake(self):
+        """Déplace le serpent"""
         head = self.snake[0][:]
         if self.direction == "UP":
             head[1] -= self.cell_size
@@ -42,6 +44,7 @@ class SnakeGame:
             self.snake.pop()
 
     def check_collision(self):
+        """Vérifie si le serpent est entré en collision avec un mur ou avec lui-même"""
         head = self.snake[0]
         if head[0] < 0 or head[0] >= self.screen_width or head[1] < 0 or head[1] >= self.screen_height:
             return True
@@ -50,6 +53,7 @@ class SnakeGame:
         return False
 
     def draw_elements(self):
+        """Dessine les éléments du jeu"""
         self.screen.blit(self.background_img, (0, 0))
         for segment in self.snake:
             pygame.draw.rect(self.screen, (0, 255, 0), (*segment, self.cell_size, self.cell_size))
@@ -57,6 +61,7 @@ class SnakeGame:
         pygame.display.flip()
 
     def save_score(self):
+        """Sauvegarde le score du joueur"""
         try:
             with open("data/scores.json", "r") as file:
                 scores = json.load(file)
@@ -69,6 +74,7 @@ class SnakeGame:
             json.dump(scores, file)
 
     def run(self):
+        """Lance le jeu"""
         while self.running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:

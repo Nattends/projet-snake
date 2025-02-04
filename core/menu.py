@@ -10,6 +10,7 @@ from .options_page import OptionsPage
 class Menu:
     """Classe représentant le menu principal"""
     def __init__(self, background_img):
+        """Initialise le menu principal"""
         self.screen_width = 500
         self.screen_height = 900
         self.background_img = background_img
