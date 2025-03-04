@@ -106,16 +106,24 @@ class SnakeGame:
             return True
         return False
 
+    def draw_snake(self):
+        """Dessine le serpent avec un dégradé et une bordure."""
+        for i, segment in enumerate(self.snake):
+            # Dégradé de vert clair à foncé pour chaque segment
+            color = (0, 255 - (i * 15), 0)
+            pygame.draw.rect(self.screen, color, (*segment, self.cell_size, self.cell_size))
+
     def draw_elements(self):
         for y, row in enumerate(self.background_pattern):
             for x, color in enumerate(row):
                 pygame.draw.rect(self.screen, color, (x * self.cell_size, y * self.cell_size, self.cell_size, self.cell_size))
         
-        for segment in self.snake:
-            pygame.draw.rect(self.screen, (0, 255, 0), (*segment, self.cell_size, self.cell_size))
+        self.draw_snake()
+
         pygame.draw.rect(self.screen, (255, 0, 0), (*self.food, self.cell_size, self.cell_size))
         for monster in self.monsters:
             pygame.draw.rect(self.screen, (128, 0, 128), (*monster, self.cell_size, self.cell_size))
+        
         font = pygame.font.Font(None, 24)
         score_text = font.render(f"Score: {self.score}", True, (255, 255, 255))
         self.screen.blit(score_text, (10, 10))
