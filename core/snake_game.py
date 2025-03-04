@@ -18,7 +18,9 @@ class SnakeGame:
         self.food = self.spawn_food()
         self.score = 0
         self.monsters = []
-        self.max_monsters = 3
+        self.color_monsters = []
+        self.count_monster = len(self.monsters)
+        self.max_monsters = 10
         self.spawn_monster()
         self.background_pattern = self.generate_background_pattern()
 
@@ -45,6 +47,14 @@ class SnakeGame:
                 monster_pos = [x, y]
                 if monster_pos not in self.snake and monster_pos != self.food and monster_pos not in self.monsters:
                     self.monsters.append(monster_pos)
+                    is_color_find = False
+                    while not is_color_find:
+                        # Random yellow 
+                        color = (random.randint(200, 255), random.randint(200, 255), 0)
+                        if color not in self.color_monsters:
+                            is_color_find = True
+
+                    self.color_monsters.append(color)
                     break
 
     def move_snake(self):
@@ -61,8 +71,8 @@ class SnakeGame:
         if head == self.food:
             self.food = self.spawn_food()
             self.score += 1
-            self.monsters = []
-            self.spawn_monster()
+            if self.score % 2 == 0:
+                self.spawn_monster()
         else:
             self.snake.pop()
 
@@ -70,7 +80,7 @@ class SnakeGame:
         """Déplace les monstres vers la tête du serpent"""
         snake_head = self.snake[0]
         updated_monsters = []
-        
+                
         for monster in self.monsters:
             dx = snake_head[0] - monster[0]
             dy = snake_head[1] - monster[1]
@@ -117,12 +127,12 @@ class SnakeGame:
         for y, row in enumerate(self.background_pattern):
             for x, color in enumerate(row):
                 pygame.draw.rect(self.screen, color, (x * self.cell_size, y * self.cell_size, self.cell_size, self.cell_size))
-        
+
         self.draw_snake()
 
         pygame.draw.rect(self.screen, (255, 0, 0), (*self.food, self.cell_size, self.cell_size))
-        for monster in self.monsters:
-            pygame.draw.rect(self.screen, (128, 0, 128), (*monster, self.cell_size, self.cell_size))
+        for monster, color in zip(self.monsters, self.color_monsters):
+            pygame.draw.rect(self.screen, color, (*monster, self.cell_size, self.cell_size))
         
         font = pygame.font.Font(None, 24)
         score_text = font.render(f"Score: {self.score}", True, (255, 255, 255))
@@ -147,6 +157,7 @@ class SnakeGame:
                     elif event.key == pygame.K_RIGHT and self.direction != "LEFT":
                         self.direction = "RIGHT"
             self.move_snake()
+
             monster_move_timer += 1
             if monster_move_timer % monster_move_interval == 0:
                 self.move_monsters()
