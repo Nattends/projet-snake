@@ -190,7 +190,6 @@ class SnakeGame:
             red_value = max(255 - (i * 20), 100)
             color = (red_value, 0, 0)
             pygame.draw.rect(self.screen, color, (*segment, self.cell_size, self.cell_size))
-            pygame.draw.rect(self.screen, (0, 0, 0), (*segment, self.cell_size, self.cell_size), 1)
 
     def draw_fire_border(self):
         """Dessine la bordure de feu (uniquement en mode jour)."""
