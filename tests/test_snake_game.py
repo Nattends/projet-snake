@@ -87,3 +87,30 @@ def test_update_night_mode(monkeypatch):
     monkeypatch.setattr(pygame, 'time', type('dummy', (), {'get_ticks': lambda: fake_time + 5000}))
     game.update_night_mode()
     assert game.night_mode_active is False
+
+def test_collision_avec_soi_meme():
+    game = SnakeGame()
+    # Créer une boucle où le serpent va se mordre la queue
+    game.snake = [[100, 100], [120, 100], [120, 120], [100, 120], [100, 100]]
+    assert game.check_collision() == True  # Le serpent doit mourir
+
+def test_move_monsters():
+    game = SnakeGame()
+    game.snake = [[100, 100]]
+    game.monsters = [[60, 100]]
+    game.move_monsters()
+    assert game.monsters[0] == [80, 100]  # Le monstre doit se rapprocher du serpent
+
+def test_fire_line_warning():
+    game = SnakeGame()
+    game.score = 20  # Activer la mécanique des lignes de feu
+    game.last_fire_line_spawn_time = pygame.time.get_ticks() - (game.fire_line_spawn_interval - game.fire_line_warning_duration)
+    game.update_fire_line()
+    assert game.fire_line_warning is not None  # L'avertissement doit être actif
+
+def test_fire_line_collision():
+    game = SnakeGame()
+    game.score = 20
+    game.fire_line = {"orientation": "horizontal", "pos": 100, "spawn_time": pygame.time.get_ticks()}
+    game.snake = [[50, 100]]  # La tête est sur la ligne de feu
+    assert game.check_collision() == True  # Le serpent doit mourir
