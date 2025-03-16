@@ -15,7 +15,6 @@ Le projet consiste à développer un jeu **Snake** en utilisant Python. Le jeu s
 
 ## 3. Fonctionnalités
 
-### 3.1 Fonctionnalités de Base
 - **Déplacement du serpent** :
   - Le serpent doit se déplacer dans quatre directions : haut, bas, gauche, droite.
   - Les contrôles sont effectués via le clavier (flèches directionnelles).
@@ -28,22 +27,28 @@ Le projet consiste à développer un jeu **Snake** en utilisant Python. Le jeu s
   - Collision avec les bords de l’écran : entraîne la fin de la partie.
   - Collision avec le corps du serpent : entraîne la fin de la partie.
 
+- **Apparition de monstres** :
+  - Des obstacles (monstres) apparaissent aléatoirement sur l'écran.
+  - Les monstres suivent le serpent.
+  - Si le serpent entre en collision avec un monstre, la partie est terminée.
+
+- **Apparition de lignes de feu** :
+  - Des lignes de feu apparaissent aléatoirement sur l'écran.
+  - Si le serpent entre en collision avec une ligne de feu, la partie est terminée.
+
+- **Mode nuit aléatoire** :
+  - Ce malus restreint la vision du joueur à quelque pixels autour du serpent.
+  - Le mode nuit est activé aléatoirement.
+
 - **Système de score** :
   - Un score est affiché et augmente à chaque fois que le serpent mange une nourriture.
-
-### 3.2 Fonctionnalités Avancées (optionnelles)
-- **Niveaux de difficulté** :
-  - Option d’ajustement de la vitesse du serpent.
-  - Ajout d'obstacles (murs ou blocs) dans l'aire de jeu.
-
-- **Système de pause** :
-  - Permet de mettre le jeu en pause et de le reprendre.
 
 - **Sauvegarde du score** :
   - Stocker les meilleurs scores dans un fichier.
 
 - **Effets visuels et sonores** :
-  - Animation ou sons pour les actions importantes (manger, collision).
+  - Animation ou sons pour les actions importantes (manger un fruit).
+  - Musique de fond.
 
 ---
 
