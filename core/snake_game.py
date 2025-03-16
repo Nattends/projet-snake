@@ -41,6 +41,16 @@ class SnakeGame:
         self.spawn_monster()
         self.background_pattern = self.generate_background_pattern()
 
+        # Configuration audio et sons
+        if not pygame.mixer.get_init():
+            pygame.mixer.init()
+        
+        try:
+            self.crunch_sound = pygame.mixer.Sound('assets/sounds/crunch_sound.mp3')
+        except:
+            print("Impossible de charger le son de croc. Vérifiez que le fichier existe.")
+            self.crunch_sound = None
+
     def generate_background_pattern(self):
         pattern = []
         for y in range(0, self.screen_height, self.cell_size):
@@ -94,6 +104,8 @@ class SnakeGame:
             head[0] += self.cell_size
         self.snake.insert(0, head)
         if head == self.food:
+            if hasattr(self, 'crunch_sound') and self.crunch_sound:
+                self.crunch_sound.play()
             self.food = self.spawn_food()
             self.score += 1
             if self.score % 2 == 0:
