@@ -88,6 +88,7 @@ class SnakeGame:
         return [x, y]
 
     def spawn_monster(self):
+        """Génère un monstre. Le monstre ne peut pas apparaître sur le serpent, la pomme ou un autre monstre."""
         if len(self.monsters) < self.max_monsters:
             while True:
                 x = random.randint(0, (self.screen_width // self.cell_size) - 1) * self.cell_size
@@ -100,6 +101,7 @@ class SnakeGame:
                     break
 
     def move_snake(self):
+        """Déplace le serpent et gère les collisions avec la pomme et les monstres."""
         head = self.snake[0][:]
         if self.direction == "UP":
             head[1] -= self.cell_size
@@ -121,6 +123,7 @@ class SnakeGame:
             self.snake.pop()
 
     def move_monsters(self):
+        """Déplace les monstres vers la tête du serpent."""
         snake_head = self.snake[0]
         updated_monsters = []
         for monster in self.monsters:
@@ -182,6 +185,7 @@ class SnakeGame:
             print("Mode nuit désactivé")  # Debug
 
     def check_collision(self):
+        """Vérifie les collisions avec les bords, le serpent, les monstres et la bordure de feu."""
         head = self.snake[0]
         if head[0] < 0 or head[0] >= self.screen_width or head[1] < 0 or head[1] >= self.screen_height:
             return True
@@ -205,6 +209,7 @@ class SnakeGame:
         return False
 
     def draw_snake(self):
+        """Dessine le serpent avec une couleur rouge foncée pour la tête et rouge clair pour le reste."""
         for i, segment in enumerate(self.snake):
             red_value = max(255 - (i * 20), 100)
             color = (red_value, 0, 0)
@@ -235,6 +240,7 @@ class SnakeGame:
                 pygame.draw.rect(self.screen, color, (x, y, self.cell_size, self.cell_size))
 
     def draw_fire_line(self):
+        """Dessine la ligne de feu létale."""
         if self.fire_line is None:
             return
         flame_colors = [
@@ -250,6 +256,7 @@ class SnakeGame:
             pygame.draw.rect(self.screen, color, (x, 0, self.cell_size, self.screen_height))
 
     def draw_fire_line_warning(self):
+        """Dessine l'alerte de ligne de feu."""
         if self.fire_line_warning is None:
             return
         current_time = pygame.time.get_ticks()
@@ -288,6 +295,7 @@ class SnakeGame:
         self.screen.blit(overlay, (0, 0))
 
     def draw_elements(self):
+        """Dessine les éléments du jeu : fond, serpent, pomme, monstres, bordure de feu, ligne de feu."""
         # Dessiner le fond en mode pixel
         for y, row in enumerate(self.background_pattern):
             for x, color in enumerate(row):
@@ -312,6 +320,7 @@ class SnakeGame:
         # Ne pas appeler flip() ici
 
     def run(self):
+        """Boucle principale du jeu."""
         monster_move_timer = 0
         monster_move_interval = 10
         while self.running:
