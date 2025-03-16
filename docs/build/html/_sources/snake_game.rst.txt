@@ -1,0 +1,7 @@
+snake\_game module
+==================
+
+.. automodule:: snake_game
+   :members:
+   :undoc-members:
+   :show-inheritance:

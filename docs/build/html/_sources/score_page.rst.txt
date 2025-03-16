@@ -1,0 +1,7 @@
+score\_page module
+==================
+
+.. automodule:: score_page
+   :members:
+   :undoc-members:
+   :show-inheritance:
