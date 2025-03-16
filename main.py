@@ -5,7 +5,7 @@ import json
 from core.menu import Menu
 
 def main():
-    """Fonction principale du jeu"""
+    """Fonction principale du jeu. Elle initialise pygame et lance le menu principal du jeu."""
     pygame.init()
     background_img = pygame.image.load('./assets/images/menu/background.png')
     background_img = pygame.transform.scale(background_img, (500, 900))
