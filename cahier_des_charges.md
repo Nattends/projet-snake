@@ -87,9 +87,10 @@ Le projet consiste à développer un jeu **Snake** en utilisant Python. Le jeu s
 
 ## 7. Livrables
 1. Code source complet du jeu.
-2. Documentation technique.
-3. Fichier de sauvegarde des scores.
-4. Assets graphiques ou sonores.
+2. Cahier des charges
+3. Documentation technique.
+4. Plan de test
+5. Fichier texte contenant le lien du dépôt GitHub
 
 ---
 
