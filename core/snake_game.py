@@ -342,6 +342,7 @@ class SnakeGame:
                 self.draw_night_overlay_pixel()
             pygame.display.flip()
             self.clock.tick(10)
+        pygame.mixer.music.stop()
         pygame.quit()
         sys.exit()
 
