@@ -65,13 +65,12 @@ Le projet consiste à développer un jeu **Snake** en utilisant Python. Le jeu s
 
 ## 5. Interface Utilisateur
 - **Écran principal** :
-  - Boutons : Jouer, Scores, Paramètres, Quitter.
+  - Boutons : Jouer, Scores, Paramètres.
 - **Écran de jeu** :
-  - Zone de jeu de taille variable
-  - Affichage du score en temps réel.
-- **Écran de fin de partie** :
-  - Message de fin de jeu (e.g., "Game Over").
-  - Option pour rejouer ou quitter.
+  - Zone de jeu de taille prédéfinie.
+- ** Fin de partie** :
+  - Lorsque le joueur perd, la fenêtre se ferme.
+  - Son score est enregistré et consultable dans le menu Scores.
 
 ---
 
