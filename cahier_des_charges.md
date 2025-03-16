@@ -81,7 +81,7 @@ Le projet consiste à développer un jeu **Snake** en utilisant Python. Le jeu s
    - Le serpent se déplace, mange des nourritures et évite les collisions.
    - Le score augmente en fonction des actions.
 3. **Fin de la partie** :
-   - Si une collision est détectée, le jeu affiche un message et propose de rejouer.
+   - Si une collision est détectée, la partie se termine.
 
 ---
 
