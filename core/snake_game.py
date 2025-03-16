@@ -59,6 +59,7 @@ class SnakeGame:
             print("Impossible de charger la musique d'ambiance. Vérifiez que le fichier existe.")
 
     def generate_background_pattern(self):
+        """Génère un motif de fond aléatoire en niveaux de gris pour un effet de pixel art. Chaque cellule est une couleur aléatoire."""
         pattern = []
         for y in range(0, self.screen_height, self.cell_size):
             row = []
