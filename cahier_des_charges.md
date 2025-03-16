@@ -92,10 +92,3 @@ Le projet consiste à développer un jeu **Snake** en utilisant Python. Le jeu s
 4. Plan de test
 5. Fichier texte contenant le lien du dépôt GitHub
 
----
-
-## 8. Ressources Nécessaires
-- Environnement de développement Python installé (e.g., PyCharm, VSCode).
-- Bibliothèque `pygame` installée.
-- Graphiques simples pour le serpent, la nourriture et le fond d’écran.
-
