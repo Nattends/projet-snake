@@ -51,6 +51,13 @@ class SnakeGame:
             print("Impossible de charger le son de croc. Vérifiez que le fichier existe.")
             self.crunch_sound = None
 
+        try:
+            pygame.mixer.music.load('assets/sounds/snake_game_audio_theme.mp3')
+            pygame.mixer.music.set_volume(0.2)  # Régler le volume à 20%
+            pygame.mixer.music.play(-1)  # -1 signifie jouer en boucle indéfiniment
+        except:
+            print("Impossible de charger la musique d'ambiance. Vérifiez que le fichier existe.")
+
     def generate_background_pattern(self):
         pattern = []
         for y in range(0, self.screen_height, self.cell_size):
