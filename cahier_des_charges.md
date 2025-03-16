@@ -7,7 +7,7 @@ Le projet consiste à développer un jeu **Snake** en utilisant Python. Le jeu s
 - Créer un jeu Snake fonctionnel.
 - Offrir une interface utilisateur intuitive et agréable.
 - Assurer un gameplay fluide et sans bugs.
-- Implémenter des fonctionnalités pour rendre le jeu captivant (e.g., niveaux de difficulté, score).
+- Implémenter des fonctionnalités pour rendre le jeu captivant (nourriture, obstacles, évènements aléatoires (ligne de feu, mode nuit), musique de jeu, etc ...).
 
 ## 3. Fonctionnalités
 
