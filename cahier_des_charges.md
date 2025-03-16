@@ -18,7 +18,7 @@ Le projet consiste à développer un jeu **Snake** en utilisant Python. Le jeu s
 ### 3.1 Fonctionnalités de Base
 - **Déplacement du serpent** :
   - Le serpent doit se déplacer dans quatre directions : haut, bas, gauche, droite.
-  - Les contrôles sont effectués via le clavier (flèches directionnelles ou touches `ZQSD`).
+  - Les contrôles sont effectués via le clavier (flèches directionnelles).
 
 - **Alimentation du serpent** :
   - Un objet (la "nourriture") apparaît aléatoirement sur l'écran.
